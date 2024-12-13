@@ -1,0 +1,13 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama/ollama:/root/.ollama
+      - ./ollama/entrypoint.sh:/entrypoint.sh
+    restart: unless-stopped
+
+volumes:
+  ollama:
