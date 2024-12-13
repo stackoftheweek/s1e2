@@ -4,7 +4,7 @@ import { Textarea } from '../ui/Textarea'
 import { Button } from '../ui/Button'
 import Plane from '../../assets/Plane.vue'
 
-const textInput: Ref<string> = ref('');
+const textInput = ref<string>('');
 
 const emit = defineEmits<{
   submit: [chat: string]
@@ -21,8 +21,8 @@ const handleClick = () => {
    <div class="flex">
       <Textarea v-model="textInput" class="mr-4">
       </Textarea>
-      <Button size="round-icon" v-on:click="handleClick">
-        <Plane class="fill-white w-5 min-w-5"/>
+      <Button size="icon" v-on:click="handleClick">
+        <Plane class="fill-white"/>
       </Button>
     </div>
 </template>
