@@ -35,3 +35,5 @@ build/
 .envrc
 ollama/ollama
 node
+redis-data
+redisinsight-data
