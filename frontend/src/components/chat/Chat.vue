@@ -10,7 +10,7 @@ const isLoading = ref<boolean>(false);
 
 
 async function fetchResponse(textContent: string) {
-  const url = `https://localhost:8080/questionGet?message=${ encodeURI(textContent) }`;
+  const url = `/api/questionGet?message=${ encodeURI(textContent) }`;
 
   try {
     const response = await fetch(url, {
