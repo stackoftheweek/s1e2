@@ -44,6 +44,11 @@ class StackOfTheWeekController {
 				.build();
 	}
 
+	@GetMapping("/api/username")
+	public String user() {
+		return "wfknowles";
+	}
+
 	@GetMapping("/questionGet")
 	public Answer questionGet(@RequestParam(value = "message", defaultValue = "Can you please tell me a joke about people that do live streams?") String message) {
 		return chatClient.prompt()
