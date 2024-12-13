@@ -8,6 +8,22 @@ services:
       - ./ollama/ollama:/root/.ollama
       - ./ollama/entrypoint.sh:/entrypoint.sh
     restart: unless-stopped
-
-volumes:
-  ollama:
+  redis:
+    image: 'redis:8.0-M02'
+    ports:
+      - '6379:6379'
+    command: [ "redis-server", "--appendonly", "yes" ]
+    restart: unless-stopped
+    volumes:
+      - ./redis-data:/data
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    environment:
+      - REDISINSIGHT_CONNECTIONS__DEFAULT__HOST=redis
+      - REDISINSIGHT_CONNECTIONS__DEFAULT__PORT=6379
+    ports:
+      - "5540:5540"
+    volumes:
+      - ./redisinsight-data:/data
+    restart: unless-stopped
