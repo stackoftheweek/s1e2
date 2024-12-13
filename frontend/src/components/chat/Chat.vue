@@ -3,16 +3,15 @@ import ChatInput from './ChatInput.vue';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 import ChatMessages from './ChatMessages.vue';
-import { Message } from '@/lib/interfaces';
+import { Message } from '../../lib/interfaces';
 
 const messages = ref<Message[]>([]);
 const isLoading = ref<boolean>(false);
 
 
 async function fetchResponse(textContent: string) {
-  const url = `https://dashaun.ngrok.io/questionGet?message=${ encodeURI(textContent) }`;
+  const url = `https://localhost:8080/questionGet?message=${ encodeURI(textContent) }`;
 
-  console.log({ url });
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -22,10 +21,15 @@ async function fetchResponse(textContent: string) {
       },
     });
 
+    if (!response) {
+      return "I'm sorry, I cannot provide a response."
+    }
+
     if (response.ok) {
       const json = await response.json();
       return json.answer;
     }
+    
 
   } catch (error) {
     console.error(error.message);
