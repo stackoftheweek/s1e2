@@ -6,6 +6,8 @@ import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -37,6 +39,7 @@ class CorsConfig implements WebMvcConfigurer {
 class StackOfTheWeekController {
 	private final ChatClient chatClient;
 
+
 	public StackOfTheWeekController(ChatClient.Builder builder) {
 		this.chatClient = builder
 				.defaultAdvisors(
@@ -44,9 +47,24 @@ class StackOfTheWeekController {
 				.build();
 	}
 
-	@GetMapping("/api/username")
-	public String user() {
-		return "wfknowles";
+	@GetMapping("/username")
+	public String user(@AuthenticationPrincipal OAuth2User oAuth2User) {
+		return oAuth2User.getAttribute("login");
+	}
+
+	@GetMapping("/user_id")
+	public String userId(@AuthenticationPrincipal OAuth2User oAuth2User) {
+		return oAuth2User.getName();
+	}
+
+	@GetMapping("/avatar_url")
+	public String url(@AuthenticationPrincipal OAuth2User oAuth2User) {
+		return oAuth2User.getAttribute("avatar_url");
+	}
+
+	@GetMapping("/user_profile")
+	public UserProfile userProfile(@AuthenticationPrincipal OAuth2User oAuth2User) {
+		return new UserProfile(oAuth2User.getName(),oAuth2User.getAttribute("login"), oAuth2User.getAttribute("avatar_url"));
 	}
 
 	@GetMapping("/questionGet")
@@ -66,4 +84,5 @@ class StackOfTheWeekController {
 	}
 }
 
+record UserProfile(String user_id, String user_name, String avatar_url){}
 record Answer(String answer){}
