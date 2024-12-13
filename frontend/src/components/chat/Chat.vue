@@ -40,7 +40,7 @@ const handleSubmit = async (textContent: string) => {
   // input message
   messages.value.push({
     textContent,
-    createdAt: Date.now(),
+    createdAt: `${Date.now()}`,
     source: 'user',
   });
 
@@ -52,7 +52,7 @@ const handleSubmit = async (textContent: string) => {
   // chatbot response
   messages.value.push({
     textContent: responseText,
-    createdAt: Date.now(),
+    createdAt: `${Date.now()}`,
     source: 'client',
   });
 }
