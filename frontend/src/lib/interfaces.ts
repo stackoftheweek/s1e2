@@ -1,5 +1,5 @@
 export interface Message {
   textContent: string;
-  createdAt: Date;
+  createdAt: string;
   source: 'user' | 'client';
 }

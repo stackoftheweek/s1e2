@@ -9,9 +9,7 @@ interface Props {
   class?: HTMLAttributes['class']
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  as: 'button',
-})
+const props = defineProps<Props>()
 </script>
 
 <template>
