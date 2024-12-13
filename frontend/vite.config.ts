@@ -6,7 +6,7 @@ import { fileURLToPath, URL } from 'node:url';
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: './frontend/dist',
+    outDir: 'dist',
     emptyOutDir: true,
   }
 })
