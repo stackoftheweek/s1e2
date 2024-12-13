@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: [
-      { find: '@/lib', replacement: fileURLToPath(new URL('./src/lib/', import.meta.url)) },
-      { find: '@/stores', replacement: fileURLToPath(new URL('./src/stores/', import.meta.url)) },
+      { find: '@/lib', replacement: fileURLToPath(new URL('.frontend/src/lib/', import.meta.url)) },
+      { find: '@/stores', replacement: fileURLToPath(new URL('.frontend/src/stores/', import.meta.url)) },
     ]
   }
 })
